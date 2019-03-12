@@ -195,7 +195,7 @@ EOF
 }
 
 module "ec2_autoscaling" {
-  source                 = "../ec2_autoscaling/"
+  source                 = "github.com/flexera/cloud-enablement/terraform/aws/modules/ec2_autoscaling"
   env                    = "${var.env}"
   app                    = "jenkins"
   artifact_etag          = "${var.ami_id}"
