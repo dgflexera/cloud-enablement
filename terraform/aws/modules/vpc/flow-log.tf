@@ -55,7 +55,7 @@ EOF
 }
 
 module "cloudwatch_lambda" {
-  source                = "../cloudwatch_lambda"
+  source                = "github.com/flexera/cloud-enablement/terraform/aws/modules/cloudwatch_lambda"
   es_endpoint           = "${var.es_endpoint}"
   env                   = "${var.env}"
   log_group_name        = "${aws_cloudwatch_log_group.vpc_flow_log.name}"
