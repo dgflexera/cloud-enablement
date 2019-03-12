@@ -1,4 +1,5 @@
 Searches current AWS account and region for AMIs matching tags
+
 Usage:
 ```
 module "logstash_ami" {
