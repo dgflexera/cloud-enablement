@@ -33,9 +33,6 @@ filter {
       }
     }
     if [source] =~ /access[_\.]log/ {
-      grok {
-          match => { "message" => "%{HTTPD_COMBINEDLOG}" }
-      }
       if !("_grokparsefailure" in [tags]) {
         date {
             match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
@@ -44,9 +41,6 @@ filter {
     }
   }
   if "syslog" in [tags] {
-    grok {
-      match => { "message" => "%{SYSLOGLINE}" }
-    }
     if !("_grokparsefailure" in [tags]) {
       date {
         match => [ "timestamp8601" , "ISO8601" ]
