@@ -1,0 +1,45 @@
+{
+	"variables": {
+		"ssh_pty": "true"
+	},
+	"builders": [{
+		"type": "amazon-ebs",
+		"source_ami_filter": {
+			"filters": {
+				"virtualization-type": "hvm",
+				"name": "CentOS Linux 7 x86_64 HVM EBS*",
+				"root-device-type": "ebs"
+			},
+			"owners": ["aws-marketplace"],
+			"most_recent": true
+		},
+		"launch_block_device_mappings": [{
+			"delete_on_termination": true,
+			"device_name": "/dev/sda1",
+			"volume_type": "gp2",
+			"volume_size": "8"
+		}],
+		"instance_type": "t2.micro",
+		"ssh_username": "centos",
+		"ami_name": "centos_base_{{timestamp}}",
+		"tags": {
+			"OS_Version": "CentOS",
+			"Release": "7",
+			"Name": "centos_base",
+			"Packer_ID": "centos_base",
+			"env": "jenkins"
+		},
+		"subnet_id": "{{user `packer_subnet_id`}}"
+	}],
+	"provisioners": [
+		{
+			"destination": "~/elastic.repo",
+			"source": "repos/elastic.repo",
+			"type": "file"
+		},
+		{
+			"type": "shell",
+			"script": "provision.sh"
+		}
+	]
+}

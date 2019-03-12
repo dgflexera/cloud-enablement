@@ -1,0 +1,43 @@
+{
+	"variables": {
+		"ssh_pty": "true"
+	},
+	"builders": [{
+		"type": "amazon-ebs",
+		"source_ami_filter": {
+			"filters": {
+				"virtualization-type": "hvm",
+				"name": "centos_base_*",
+				"root-device-type": "ebs"
+			},
+			"owners": ["self"],
+			"most_recent": true
+		},
+		"launch_block_device_mappings": [{
+			"delete_on_termination": true,
+			"device_name": "/dev/sda1",
+			"volume_type": "gp2",
+			"volume_size": "8"
+		}],
+		"instance_type": "t2.small",
+		"ssh_username": "centos",
+		"ami_name": "logstash_{{timestamp}}",
+		"tags": {
+			"Name": "logstash",
+			"Packer_ID": "logstash",
+			"env": "jenkins"
+		},
+                "subnet_id": "{{user `packer_subnet_id`}}"
+	}],
+	"provisioners": [
+		{
+			"destination": "~/logstash.repo",
+			"source": "repos/logstash.repo",
+			"type": "file"
+		},
+		{
+			"type": "shell",
+			"script": "provision.sh"
+		}
+	]
+}
