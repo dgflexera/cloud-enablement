@@ -26,9 +26,6 @@ filter {
   }
   if "apache" in [tags] {
     if [source] =~ /error[_\.]log/ {
-      grok {
-          match => { "message" => "%{HTTPD_ERRORLOG}" }
-      }
       if !("_grokparsefailure" in [tags]) {
         date {
             match => [ "timestamp" , "EEE MMM dd HH:mm:ss.SSSSSS yyyy" ]
