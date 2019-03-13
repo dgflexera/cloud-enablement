@@ -32,6 +32,13 @@ resource "aws_security_group" "lambda" {
     self = true
   }
 
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags {
     Name = "es-cleanup"
     env = "${var.env}"
