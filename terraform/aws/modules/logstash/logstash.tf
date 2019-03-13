@@ -10,7 +10,7 @@ data "template_file" "logstash" {
 }
 
 module "ec2_autoscaling" {
-  source                 = "../ec2_autoscaling/"
+  source                 = "github.com/flexera/cloud-enablement/terraform/aws/modules/ec2_autoscaling"
   env                    = "${var.env}"
   app                    = "logstash"
   artifact_etag          = "${var.ami_id}"
