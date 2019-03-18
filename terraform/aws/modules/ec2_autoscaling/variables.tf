@@ -42,7 +42,9 @@ variable "asg_target" {
   default = 40
 }
 
-variable "elb_name" {}
+variable "elb_name" {
+  default = ""
+}
 
 variable "healthcheck_grace_period" {
   default = 600
