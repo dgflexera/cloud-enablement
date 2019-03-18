@@ -83,7 +83,7 @@ resource "aws_cloudformation_stack" "autoscaling_group_alb" {
         "LaunchConfigurationName": "${aws_launch_configuration.ec2.name}",
         "MaxSize": "${var.max_instances}",
         "MinSize": "${var.min_instances}",
-        "TargetGroupARNs" : ["${var.alb_target_groups}"]
+        "TargetGroupARNs" : ["${var.alb_target_groups}"],
         "TerminationPolicies": ["OldestLaunchConfiguration", "OldestInstance"],
         "HealthCheckType": "ELB",
         "HealthCheckGracePeriod": "${var.healthcheck_grace_period}",
