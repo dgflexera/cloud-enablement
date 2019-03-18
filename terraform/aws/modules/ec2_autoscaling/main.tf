@@ -67,7 +67,7 @@ resource "aws_cloudformation_stack" "autoscaling_group" {
   }
 }
 EOF
-count = "${var.lb_type == "elb" ? 1: 0}"
+  count = "${var.lb_type == "elb" ? 1: 0}"
 }
 
 resource "aws_cloudformation_stack" "autoscaling_group_alb" {
@@ -119,8 +119,7 @@ resource "aws_cloudformation_stack" "autoscaling_group_alb" {
     }
   }
 }
-count = "${var.lb_type == "alb" ? 1: 0}"
-
 EOF
+  count = "${var.lb_type == "alb" ? 1: 0}"
 }
 
