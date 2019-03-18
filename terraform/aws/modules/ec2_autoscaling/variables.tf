@@ -51,3 +51,7 @@ variable "healthcheck_grace_period" {
 variable "lb_type" {
   default = "elb"
 }
+
+variable "alb_target_groups" {
+  default = ""
+}
