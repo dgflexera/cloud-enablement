@@ -47,3 +47,7 @@ variable "elb_name" {}
 variable "healthcheck_grace_period" {
   default = 600
 }
+
+variable "lb_type" {
+  default = "elb"
+}
