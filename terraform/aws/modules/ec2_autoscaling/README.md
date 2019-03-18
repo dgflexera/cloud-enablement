@@ -16,6 +16,7 @@ module "ec2_autoscaling" {
   subnet_ids             = "${var.subnets}"
   max_instances          = "2"
   min_instances          = "1"
-  elb_name               = "${aws_elb.jenkins-elb.name}"
+  elb_name               = "${aws_elb.jenkins-elb.name}" #If Classic ELB, this is the name of the LB. If ALB, insert the ARN of the target group to associate with
   asg_target             = "200" #Target % capacity of autoscaling group to be considered successful
+  lb_type                = "elb" #Can be either "elb" or "alb"
 }
